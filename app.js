@@ -13,6 +13,7 @@ for (const number of choices)
     options += number;
 }
 
+baseCombinations = Math.pow(options,length);
 combinations = Math.pow(options,length);
 
 //If greater than 1
@@ -38,3 +39,5 @@ if (choices.length > 1)
 
 console.log("Selected: " + choices.length);
 console.log("Combinations: " + combinations);
+console.log("Base Combinations: " + baseCombinations);
+console.log("Difference: " + (baseCombinations - combinations));
