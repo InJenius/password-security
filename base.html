@@ -6,6 +6,38 @@
                 vertical-align: middle;
                 display: inline-block;
             }
+
+            /*
+            label 
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                text-align: right;
+                width: 400px;
+                line-height: 26px;
+                margin-bottom: 10px;
+            }
+
+            input 
+            {
+                height: 20px;
+                flex: 0 0 200px;
+                margin-left: 10px;
+            }
+            */
+            .textbox
+            {
+                width:180px;
+                clear:left;
+                text-align:right;
+                padding-right:10px;
+            }
+
+            input, label 
+            {
+                float:left;
+            }
         </style>
         
     </head>
@@ -29,14 +61,17 @@
         <button onclick="assessSettings()" >Go</button>
 
         <br><br>
-        <label for="baseCombinations">Total combinations: </label>
+        <label class="textbox" for="baseCombinations">Total combinations: </label>
         <input type="text" id="baseCombinations" value="0" readonly>
         <br>
-        <label for="combinations">Must include combinations: </label>
+        <label class="textbox" for="combinations">Must include combinations: </label>
         <input type="text" id="combinations" value="0" readonly>
         <br>
-        <label for="difference">Difference: </label>
+        <label class="textbox" for="difference">Difference: </label>
         <input type="text" id="difference" value="0" readonly>
+        <br>
+        <label class="textbox" for="cracktime">Time to crack in minutes: </label>
+        <input type="text" id="cracktime" value="0" readonly>
         <br>
         
 
@@ -87,6 +122,11 @@
                 document.getElementById("combinations").value = combinations.toString();
                 document.getElementById("baseCombinations").value = baseCombinations.toString();
                 document.getElementById("difference").value = (baseCombinations - combinations).toString();
+
+                //500,000 passwords a second
+                //Time in seconds
+                timeToCrack = combinations * 0.000002 / 2 / 60;
+                document.getElementById("cracktime").value = timeToCrack.toString();
             }
         </script>
     </body>
