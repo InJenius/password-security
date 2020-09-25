@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <style>
+            [type="checkbox"]
+            {
+                vertical-align: middle;
+                display: inline-block;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <h1>Password security field evaluator</h1>
+
+        <label for="lowercase">Include Lowercase:</label>
+        <input type=checkbox id="lowercase">
+        <label for="uppercase">Include Uppercase</label>
+        <input type=checkbox id="uppercase">
+        <label for="numbers">Include Numbers</label>
+        <input type=checkbox id="numbers">
+        <label for="punctuation">Include Punctuation</label>
+        <input type=checkbox id="punctuation">
+
+        <br><br>
+        <label for="length">Length: </label>
+        <input type="number" id="length" value="8">
+
+        <br><br>
+        <button onclick="assessSettings()" >Go</button>
+
+        <br><br>
+        <label for="baseCombinations">Total combinations: </label>
+        <input type="text" id="baseCombinations" value="0" readonly>
+        <br>
+        <label for="combinations">Must include combinations: </label>
+        <input type="text" id="combinations" value="0" readonly>
+        <br>
+        <label for="difference">Difference: </label>
+        <input type="text" id="difference" value="0" readonly>
+        <br>
+        
+
+        <script>
+            function assessSettings()
+            {
+                var lowercase = 26;
+                var uppercase = 26;
+                var numeric = 10;
+                var punctuation = 10;
+
+                //Max is 165
+                var length = document.getElementById('length').value;
+
+                var combinations = 0;
+                var choices = [];
+                var options = 0;
+
+                if (document.getElementById('lowercase').checked) { choices.push(lowercase); options += lowercase; }
+                if (document.getElementById('uppercase').checked) { choices.push(uppercase); options += uppercase; }
+                if (document.getElementById('numbers').checked) { choices.push(numeric); options += numeric; }
+                if (document.getElementById('punctuation').checked) { choices.push(punctuation); options += punctuation; }
+
+                baseCombinations = Math.pow(options,length);
+                combinations = Math.pow(options,length);
+
+                //If greater than 1
+                if (choices.length > 1)
+                {
+                    for (let i = 0; i < choices.length; i++)
+                    {
+                        combinations -= Math.pow(choices[i],length);
+
+                        //If greater than 2
+                        if (choices.length > 2) { combinations -= Math.pow((options - choices[i]),length); }
+
+                        //If greater than 3
+                        if (choices.length > 3)
+                        {
+                            for (let j = i + 1; j < choices.length; j++)
+                            {
+                                combinations += Math.pow((choices[i] + choices[j]),length);
+                            }
+                        }
+                    }
+                }
+
+                document.getElementById("combinations").value = combinations.toString();
+                document.getElementById("baseCombinations").value = baseCombinations.toString();
+                document.getElementById("difference").value = (baseCombinations - combinations).toString();
+            }
+        </script>
+    </body>
+</html>
