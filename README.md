@@ -14,4 +14,4 @@ Outputs
 * Difference between the two combination totals
 * Time for computer to crack at 500,000 passwords a second
 
-An online version of the tool can be found on my [website](injenius.net/tools/password-security).
+An online version of the tool can be found on my [website](https://injenius.net/tools/password-security).
