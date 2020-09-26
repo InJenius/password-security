@@ -1,5 +1,3 @@
-# password-security
-A small program to help determine security information regarding password fields
 # Secure Password Generation
 Small web application to provide details on number of password combinations available dependent on parameters.
 
